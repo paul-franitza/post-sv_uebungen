@@ -2,7 +2,7 @@
 layout: post
 title: Aufschlag
 description: Lorem ipsum dolor übers Netz drübba
-image: assets/images/img_serve.jpg
+image: assets/images/img_serve.jpeg
 nav-menu: true
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title: Zuspiel
 description: Lorem ipsum dolor set Außen
-image: assets/images/img_setting.jpg
+image: assets/images/img_setting.jpeg
 nav-menu: true
 ---
 

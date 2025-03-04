@@ -2,7 +2,7 @@
 layout: post
 title: Abwehr
 description: Libero ipsum dolor dig amen
-image: assets/images/img_defense.jpg
+image: assets/images/img_defense.jpeg
 nav-menu: true
 ---
 
