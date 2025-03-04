@@ -6,7 +6,6 @@ description: .
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: # the base hostname & protocol for your site
 author: Paul Franitza
-phone: +49 1525 966-5155
 
 # homepage tiles
 tiles-source: pages # accepts "posts" or "pages"
@@ -17,7 +16,6 @@ tiles-count: 10
 # Icons are not shown if value is empty
 # You need to restart jekyll for changes to have an effect
 socials:
-  Phone: +49 1525 966-5155
   Envelope: paul.franitza@gmail.com
   GitHub: https://github.com/paul-franitza
   Instagram: https://www.instagram.com/paul_fr_/
