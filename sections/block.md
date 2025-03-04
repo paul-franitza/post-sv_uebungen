@@ -2,7 +2,7 @@
 layout: post
 title: Block
 description: Build roofs - shelter for the homeless
-image: assets/images/banner.jpg
+image: assets/images/img_block.jpg
 nav-menu: true
 ---
 

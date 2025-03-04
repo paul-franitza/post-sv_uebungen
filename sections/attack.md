@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: page
 title: Angriff
-description: Lorem ipsum dolor set Außen
-image: assets/images/pic11.jpg
+description: Lorem ipsum dolor hit Zone
+image: assets/images/img_attack.jpg
 nav-menu: true
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title: Erwärmung
 description: Lorem ipsum dolor mach Knie warm
-image: assets/images/banner.jpg
+image: assets/images/img_warmup.jpg
 nav-menu: true
 ---
 

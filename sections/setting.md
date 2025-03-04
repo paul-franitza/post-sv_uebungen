@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Spielfluss
-description: Lorem ipsum dolor Ball bleibt in der Luft
-image: assets/images/img_gameflow.jpg
+title: Zuspiel
+description: Lorem ipsum dolor set Außen
+image: assets/images/img_setting.jpg
 nav-menu: true
 ---
 
