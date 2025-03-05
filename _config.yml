@@ -2,8 +2,8 @@
 title: Post SV
 subtitle: Volleyball
 email: paul.franitza@gmail.com
-description: .
-baseurl: "/" # the subpath of your site, e.g. /blog
+description:  
+baseurl: "/"
 url: # the base hostname & protocol for your site
 author: Paul Franitza
 
@@ -31,3 +31,4 @@ exclude:
 - LICENSE.md
 - CONTRIBUTING.md
 - README.md 
+- _posts/2025-3-5-template_exercise.md
