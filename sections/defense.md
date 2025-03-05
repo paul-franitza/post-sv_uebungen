@@ -1,7 +1,8 @@
 ---
-layout: post
+layout: page
 title: Abwehr
 description: Libero ipsum dolor dig amen
+tag: defense
 image: assets/images/img_defense.jpeg
 nav-menu: true
 ---

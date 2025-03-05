@@ -2,6 +2,7 @@
 layout: page
 title: Angriff
 description: Lorem ipsum dolor hit Zone
+tag: [attack]
 image: assets/images/img_attack.jpeg
 nav-menu: true
 ---

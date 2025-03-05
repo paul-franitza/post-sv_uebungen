@@ -1,7 +1,8 @@
 ---
-layout: post
+layout: page
 title: Zuspiel
 description: Lorem ipsum dolor set Außen
+tag: setting
 image: assets/images/img_setting.jpeg
 nav-menu: true
 ---

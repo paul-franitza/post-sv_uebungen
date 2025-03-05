@@ -1,7 +1,8 @@
 ---
-layout: post
+layout: page
 title: Spielfluss
 description: Lorem ipsum dolor Ball bleibt in der Luft
+tag: gameflow
 image: assets/images/img_gameflow.jpeg
 nav-menu: true
 ---

@@ -1,7 +1,8 @@
 ---
-layout: post
+layout: page
 title: Block
 description: Build roofs - shelter for the homeless
+tag: block
 image: assets/images/img_block.jpeg
 nav-menu: true
 ---

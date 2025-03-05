@@ -1,7 +1,8 @@
 ---
-layout: post
+layout: page
 title: Erwärmung
 description: Lorem ipsum dolor mach Knie warm
+tag: warmup
 image: assets/images/img_warmup.jpeg
 nav-menu: true
 ---

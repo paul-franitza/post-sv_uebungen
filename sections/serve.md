@@ -1,7 +1,8 @@
 ---
-layout: post
+layout: page
 title: Aufschlag
 description: Lorem ipsum dolor übers Netz drübba
+tag: serve
 image: assets/images/img_serve.jpeg
 nav-menu: true
 ---
