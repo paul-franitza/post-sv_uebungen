@@ -8,8 +8,6 @@
 						{% assign url = key_value[1] %}
 						{% if url contains "@" %}
 						  {% assign href = "mailto:" | append: url %}
-						{% elsif url contains "+" %}
-						  {% assign href = "tel:" | append: url %}
 						{% else %}
 						  {% assign href = url %}
 						{% endif %}
