@@ -1,0 +1,47 @@
+// _grid.scss - Post grid styling
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2em;
+  }
+  
+  .post-box {
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    padding: 1.5em;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .post-content {
+      h2 {
+        margin-bottom: 0.5em;
+      }
+      
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+  // Responsive adjustments
+  @media screen and (max-width: 736px) {
+    .posts-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5em;
+    }
+    
+    .post-box {
+      padding: 1.25em;
+      
+      &:hover {
+        transform: translateY(-3px);
+      }
+    }
+  }
