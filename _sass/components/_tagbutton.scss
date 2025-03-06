@@ -1,0 +1,33 @@
+.tags-container {
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Use existing button styles */
+.tag-button {
+    @extend .button;
+    background-color: transparent;
+    box-shadow: inset 0 0 0 2px _palette(fg-bold);
+    color: _palette(fg-bold);
+    
+    &:hover, &:active {
+        box-shadow: inset 0 0 0 2px _palette(highlight);
+        color: _palette(highlight);
+        background-color: transparentize(_palette(highlight), 0.9);
+    }
+
+    &.active {  // Stay hovered when toggled
+        box-shadow: inset 0 0 0 2px _palette(highlight) !important;
+        color: _palette(highlight) !important;
+        background-color: transparentize(_palette(highlight), 0.9) !important;
+    }
+}
