@@ -21,22 +21,25 @@
             <div class="tags-row">
               {% for tag in page.tag %}
               {% if tag != "" %}
-              <button class="tag-button" data-tag="{{ tag }}">{{
-                tag }}</button>
+              <button class="tag-button" data-tag="{{ tag }}">{{ tag }}</button>
               {% endif %}
               {% endfor %}
-              <button class="tag-button active"
-                data-tag="all">All</button>
+              <button class="tag-button active" data-tag="all">All</button>
             </div>
           </div>
           <!-- Post Lists -->
           <div class="posts-grid">
             {% for post in site.posts %}
             <a href="{{ post.url | relative_url }}" class="post-box"
-              data-tags="{% for tag in post.tags %}{{ tag }} {% endfor %}">
+              data-tags="{% for tag in post.tag %}{{ tag }} {% endfor %}">
               <div class="post-content">
                 <h2>{{ post.title }}</h2>
                 <p>{{ post.description }}</p>
+              </div>
+              <div class="post-tags">
+                {% for tag in post.tags %}
+                <span class="post-tag">{{ tag }}</span>
+                {% endfor %}
               </div>
             </a>
             {% endfor %}
@@ -127,6 +130,38 @@ document.addEventListener('DOMContentLoaded', function() {
       box.style.display = shouldShow ? 'block' : 'none';
     });
   }
+  
+  // Highlight matching tags in post boxes
+  function highlightMatchingTags() {
+    if (activeTags.has('all')) {
+      // No highlighting needed when all posts are shown
+      document.querySelectorAll('.post-tag').forEach(tag => {
+        tag.classList.remove('highlight');
+      });
+      return;
+    }
+    
+    document.querySelectorAll('.post-box').forEach(box => {
+      const postTagElements = box.querySelectorAll('.post-tag');
+      postTagElements.forEach(tagEl => {
+        if (activeTags.has(tagEl.textContent)) {
+          tagEl.classList.add('highlight');
+        } else {
+          tagEl.classList.remove('highlight');
+        }
+      });
+    });
+  }
+  
+  // Update tag highlighting when visibility changes
+  const originalUpdateVisibility = updateVisibility;
+  updateVisibility = function() {
+    originalUpdateVisibility();
+    highlightMatchingTags();
+  };
+  
+  // Initial highlighting
+  highlightMatchingTags();
 });
 </script>
   </body>

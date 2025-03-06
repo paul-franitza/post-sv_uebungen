@@ -1,47 +1,147 @@
-// _grid.scss - Post grid styling
+// _grid.scss - Post grid styling with Forty theme integration
 
 .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2em;
+  margin-top: 2em;
+}
+
+.post-box {
+  @include vendor('transition', (
+    'background-color #{_duration(transition)} ease-in-out',
+    'box-shadow #{_duration(transition)} ease-in-out',
+    'color #{_duration(transition)} ease-in-out',
+    'transform #{_duration(transition)} ease-in-out'
+  ));
+  
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 2px _palette(fg-bold);
+  color: _palette(fg);
+  text-decoration: none;
+  display: block;
+  padding: 2em;
+  position: relative;
+  overflow: hidden;
+  
+  &:hover, &:active {
+    box-shadow: inset 0 0 0 2px _palette(highlight);
+    transform: translateY(-5px);
+    
+    h2 {
+      color: _palette(highlight);
+    }
+  }
+  
+  &:active {
+    background-color: transparentize(_palette(highlight), 0.9);
+    box-shadow: inset 0 0 0 2px desaturate(darken(_palette(highlight), 15), 5);
+    transform: translateY(-2px);
+    
+    h2 {
+      color: desaturate(darken(_palette(highlight), 15), 5);
+    }
+  }
+  
+  .post-content {
+    h2 {
+      @include vendor('transition', 'color #{_duration(transition)} ease-in-out');
+      font-size: 1.5em;
+      margin-bottom: 0.5em;
+      color: _palette(fg-bold);
+      letter-spacing: _font(letter-spacing-alt);
+      line-height: 1.3;
+    }
+    
+    p {
+      margin-bottom: 0;
+      font-size: 0.9em;
+    }
+  }
+  
+  // Post tags container
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 1.5em;
+    padding-top: 1em;
+    border-top: 1px solid transparentize(_palette(fg-bold), 0.85);
+  }
+  
+  // Individual post tag
+  .post-tag {
+    @include vendor('transition', (
+      'background-color #{_duration(transition)} ease-in-out',
+      'box-shadow #{_duration(transition)} ease-in-out',
+      'color #{_duration(transition)} ease-in-out'
+    ));
+    
+    font-size: 0.6em;
+    font-weight: _font(weight-bold);
+    letter-spacing: _font(letter-spacing-alt);
+    text-transform: uppercase;
+    padding: 0.3em 0.6em;
+    box-shadow: inset 0 0 0 1px transparentize(_palette(fg-bold), 0.5);
+    background-color: transparent;
+    color: _palette(fg);
+    border-radius: 0;
+    
+    &.highlight {
+      box-shadow: inset 0 0 0 1px _palette(highlight);
+      color: _palette(highlight);
+      background-color: transparentize(_palette(highlight), 0.9);
+    }
+  }
+}
+
+// Responsive adjustments
+@include breakpoint(medium) {
+  .posts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5em;
   }
   
   .post-box {
-    border: 1px solid #eaeaea;
-    border-radius: 5px;
-    padding: 1.5em;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    color: inherit;
-    
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
+    padding: 1.75em;
     
     .post-content {
       h2 {
-        margin-bottom: 0.5em;
+        font-size: 1.35em;
       }
-      
-      p {
-        margin-bottom: 0;
-      }
-    }
-  }
-  
-  // Responsive adjustments
-  @media screen and (max-width: 736px) {
-    .posts-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5em;
     }
     
-    .post-box {
-      padding: 1.25em;
-      
-      &:hover {
-        transform: translateY(-3px);
-      }
+    .post-tags {
+      margin-top: 1.25em;
+      gap: 0.4em;
+    }
+    
+    .post-tag {
+      font-size: 0.55em;
+      padding: 0.25em 0.5em;
     }
   }
+}
+
+@include breakpoint(small) {
+  .posts-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25em;
+  }
+  
+  .post-box {
+    padding: 1.5em;
+    
+    .post-content {
+      h2 {
+        font-size: 1.25em;
+      }
+    }
+    
+    .post-tag {
+      font-size: 0.5em;
+    }
+  }
+}
