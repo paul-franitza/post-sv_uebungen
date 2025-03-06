@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+    Forty by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+{% include head.html %}
+
+<body>
+
+    {% include header.html %} 
+    
+<!-- Main -->
+<div id="main" class="alt">
+
+<!-- One -->
+<section id="one">
+    <div class="inner">
+        <header class="major">
+            <h1>{{ page.title }}</h1>
+        </header>
+        
+        <!-- Tag Filter -->
+        <div class="tags-container">
+            <div class="tags-row">
+                {% assign all_tags = "" %}
+                {% for post in site.posts %}
+                    {% for tag in post.tags %}
+                        {% unless all_tags contains tag %}
+                            {% assign all_tags = all_tags | append: "," | append: tag %}
+                        {% endunless %}
+                    {% endfor %}
+                {% endfor %}
+                {% assign unique_tags = all_tags | split: "," | uniq %}
+                {% for tag in unique_tags %}
+                    {% if tag != "" %}
+                        <button class="tag-button button" data-tag="{{ tag }}" onclick="toggleTag('{{ tag }}')">{{ tag }}</button>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Post Lists -->
+        <div class="posts-grid">
+            {% for post in site.posts %}
+                <a href="{{ post.url | relative_url }}" class="post-box" data-tags="{{ post.tags | join: ' ' }}">
+                    <div class="post-content">
+                        <h2>{{ post.title }}</h2>
+                        <p>{{ post.description }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>      
+    </div>
+</section>
+
+</div>
+
+    {% include footer.html %}
+
+    <script>
+        let selectedTags = new Set();
+
+        function toggleTag(tag) {
+            let tagButton = document.querySelector(`[data-tag='${tag}']`);
+            if (selectedTags.has(tag)) {
+                selectedTags.delete(tag);
+                tagButton.classList.remove("active");
+            } else {
+                selectedTags.add(tag);
+                tagButton.classList.add("active");
+            }
+            filterPosts();
+        }
+
+        function filterPosts() {
+            let posts = document.querySelectorAll(".post-box");
+            posts.forEach(post => {
+                let postTags = post.getAttribute("data-tags").split(" ");
+                let shouldShow = selectedTags.size === 0 || postTags.some(tag => selectedTags.has(tag));
+
+                post.style.display = shouldShow ? "block" : "none";
+            });
+        }
+    </script>
+</body>
+
+</html>
