@@ -1,0 +1,88 @@
+/* Search Styling */
+.search-container {
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+  
+  .search-input-wrapper {
+    display: flex;
+    position: relative;
+    max-width: 500px;
+    margin-bottom: 0.5rem;
+  }
+  
+  #search-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+    padding-right: 4rem; /* Make room for both buttons */
+  }
+  
+  #search-button,
+  #clear-search {
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    transition: color 0.2s ease;
+    width: 24px;  /* Set fixed width to match icon size */
+    height: 24px; /* Set fixed height to match icon size */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  
+  #search-button:hover,
+  #clear-search:hover {
+    color: #000;
+  }
+  
+  #search-button:focus,
+  #clear-search:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
+  
+  #search-button {
+    right: 2.5rem;
+  }
+  
+  #clear-search {
+    right: 0.8rem;
+  }
+  
+  /* Remove any possible browser-specific styling */
+  #search-button::-moz-focus-inner,
+  #clear-search::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+  
+  #results-count {
+    font-size: 0.9rem;
+    color: #777;
+  }
+  
+  /* Highlight styling */
+  .search-highlight {
+    background-color: rgba(255, 230, 0, 0.4);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+
+  .tag-hidden, .search-hidden {
+      display: none !important;
+  }
