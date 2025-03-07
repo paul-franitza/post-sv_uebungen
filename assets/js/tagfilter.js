@@ -1,4 +1,5 @@
-function initTagFiltering() {
+// tagfilter.js - Tag filtering functionality
+document.addEventListener('DOMContentLoaded', function() {
   const tagButtons = document.querySelectorAll('.tag-button');
   const postBoxes = document.querySelectorAll('.post-box');
   const activeTags = new Set(['all']);
@@ -58,15 +59,28 @@ function initTagFiltering() {
         }
       }
 
+      // After changing tags, update visibility
       updateVisibility();
+
+      // Apply search filter if active
+      if (window.applyWordSearch &&
+          typeof window.applyWordSearch === 'function') {
+        window.applyWordSearch();
+      }
     });
   });
+
+  // Make updateVisibility and getActiveTags available globally
+  window.updateTagVisibility = updateVisibility;
+  window.getActiveTags = function() {
+    return activeTags;
+  };
 
   function updateVisibility() {
     // Show all posts if "All" is active
     if (activeTags.has('all')) {
       postBoxes.forEach(box => {
-        box.style.display = 'block';
+        box.classList.remove('tag-hidden');
       });
       return;
     }
@@ -78,8 +92,18 @@ function initTagFiltering() {
       // Show post only if it contains ALL selected tags
       const shouldShow =
           Array.from(activeTags).every(tag => postTags.includes(tag));
-      box.style.display = shouldShow ? 'block' : 'none';
+      if (shouldShow) {
+        box.classList.remove('tag-hidden');
+      } else {
+        box.classList.add('tag-hidden');
+      }
     });
+
+    // Update results count if word search is not active
+    if (!document.getElementById('search-input') ||
+        document.getElementById('search-input').value.trim() === '') {
+      updateResultsCount();
+    }
   }
 
   // Highlight matching tags in post boxes
@@ -104,16 +128,25 @@ function initTagFiltering() {
     });
   }
 
+  function updateResultsCount() {
+    const resultsCount = document.getElementById('results-count');
+    if (resultsCount) {
+      const visibleCount =
+          document.querySelectorAll('.post-box:not(.tag-hidden)').length;
+      resultsCount.textContent = visibleCount === 1 ?
+          '1 Ergebnis gefunden' :
+          `${visibleCount} Ergebnisse gefunden`;
+    }
+  }
+
   // Update tag highlighting when visibility changes
   const originalUpdateVisibility = updateVisibility;
   updateVisibility = function() {
     originalUpdateVisibility();
     highlightMatchingTags();
+    return;
   };
 
   // Initial highlighting
   highlightMatchingTags();
-}
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initTagFiltering);
+});
