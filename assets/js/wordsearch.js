@@ -1,4 +1,4 @@
-// word-search.js - A simple word-based search for Jekyll posts
+// word-search.js - A simple word-based search for Jekyll posts with sorting
 document.addEventListener('DOMContentLoaded', function() {
   // Get DOM elements
   const searchInput = document.getElementById('search-input');
@@ -7,14 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const postBoxes = document.querySelectorAll('.post-box');
   const resultsCount = document.getElementById('results-count');
 
-  // Add CSS class for search hiding
-  const style = document.createElement('style');
-  style.textContent = `
-    .tag-hidden, .search-hidden {
-      display: none !important;
-    }
-  `;
-  document.head.appendChild(style);
+  // Add sort button to the DOM
+  addSortButton();
 
   // Initialize results count
   if (resultsCount && !resultsCount.textContent) {
@@ -178,5 +172,106 @@ document.addEventListener('DOMContentLoaded', function() {
       resultsCount.textContent =
           count === 1 ? '1 Ergebnis gefunden' : `${count} Ergebnisse gefunden`;
     }
+  }
+
+  // Modify the addSortButton function in your word-search.js file
+  function addSortButton() {
+    // Instead of creating a new sort button if it's in the HTML, just find it
+    let sortButton = document.getElementById('sort-button');
+    let sortIcon = document.getElementById('sort-icon');
+
+    // If the button doesn't exist in the HTML (backward compatibility), create
+    // it
+    if (!sortButton) {
+      // Find the sort button wrapper - it should already exist in your HTML
+      const sortButtonWrapper = document.querySelector('.sort-button-wrapper');
+
+      // If the wrapper doesn't exist, we need to create everything
+      if (!sortButtonWrapper) {
+        // Find the search controls container
+        const searchControls = document.querySelector('.search-controls');
+
+        // If we can't find it, try to adapt to the old structure
+        if (!searchControls) {
+          // Old code for backward compatibility
+          const searchContainer = searchInput?.parentElement;
+          if (!searchContainer) return;
+
+          // Create sort button wrapper
+          const newSortButtonWrapper = document.createElement('div');
+          newSortButtonWrapper.className = 'sort-button-wrapper';
+
+          // Create sort button
+          sortButton = document.createElement('button');
+          sortButton.id = 'sort-button';
+          sortButton.className = 'sort-button';
+          sortButton.setAttribute('aria-label', 'Sort order');
+
+          // Create sort icon/text
+          sortIcon = document.createElement('span');
+          sortIcon.id = 'sort-icon';
+          sortIcon.textContent = 'A-Z';
+
+          // Assemble button
+          sortButton.appendChild(sortIcon);
+          newSortButtonWrapper.appendChild(sortButton);
+
+          // Add the button after the search input wrapper
+          searchContainer.parentNode.insertBefore(
+              newSortButtonWrapper, searchContainer.nextSibling);
+        }
+      }
+    }
+
+    // Set up sort functionality
+    setupSorting(sortButton, sortIcon);
+  }
+
+  // Function to setup sorting functionality
+  function setupSorting(sortButton, sortIcon) {
+    if (!sortButton || !sortIcon) return;
+
+    let isAscending = true;  // Default is A-Z
+
+    // Function to sort posts
+    function sortPosts() {
+      // Find the container that holds all the post boxes
+      const postContainer = postBoxes[0]?.parentElement;
+      if (!postContainer || postBoxes.length === 0) return;
+
+      // Get all posts as an array for sorting
+      const posts = Array.from(postBoxes);
+
+      // Sort the posts based on title
+      posts.sort((a, b) => {
+        const titleA = a.querySelector('h2')?.textContent.toLowerCase() || '';
+        const titleB = b.querySelector('h2')?.textContent.toLowerCase() || '';
+
+        if (isAscending) {
+          return titleA.localeCompare(titleB);
+        } else {
+          return titleB.localeCompare(titleA);
+        }
+      });
+
+      // Reinsert the sorted posts
+      posts.forEach(post => {
+        postContainer.appendChild(post);
+      });
+    }
+
+    // Add click event to sort button
+    sortButton.addEventListener('click', function() {
+      isAscending = !isAscending;
+
+      // Update button text
+      sortIcon.textContent = isAscending ? 'A-Z' : 'Z-A';
+
+      // Sort the posts
+      sortPosts();
+    });
+
+    // Initial sort (A-Z)
+    sortPosts();
   }
 });
