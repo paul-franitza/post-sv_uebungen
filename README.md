@@ -8,6 +8,6 @@ Coming soon...
 
 # Credits
 
-Bilder - Winston Schilling  
+Bilder - [Winston Schilling](https://www.instagram.com/notsniwgnillisch)  
 Design - [HTML5 UP](https://html5up.net)  
 Jekyll integration - [Andrew Banchich](https://github.com/andrewbanchich)  
