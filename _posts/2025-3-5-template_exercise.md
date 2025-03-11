@@ -23,4 +23,4 @@ Möchte man aber den Fokus auf ein bestimmtes Wort richten, so kann man es *kurs
 Wenn es auf einer anderen Website ein sehr gutes Video zu dieser Übung gibt, dass es sehr gut veranschaulicht, dann kann man einen [Hyperlink](https://www.youtube.com/watch?v=dQw4w9WgXcQ) einfügen.
 
 Bei einem Bild muss man primär darauf achten, dass der Pfad und die Dateiendung richtig angegeben sind:
-![Name des Bildes](./../../../images/dummy_exercise/bildname.jpg)
+![Name des Bildes]({{ site.url | absolute_path}}/assets/post_images/dummy_exercise/example_image.jpg)
