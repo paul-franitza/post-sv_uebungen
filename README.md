@@ -8,7 +8,7 @@ Voraussetzung: Ruby und Bundler.
 
 ```sh
 bundle install          # einmalig
-bundle exec jekyll serve --livereload
+bundle exec jekyll serve --baseurl "" --livereload
 ```
 
 Dann http://localhost:4000 öffnen. Änderungen an Übungen werden automatisch neu gebaut (Änderungen an `_config.yml` brauchen einen Neustart).
@@ -22,7 +22,7 @@ Dann http://localhost:4000 öffnen. Änderungen an Übungen werden automatisch n
 
 ## Veröffentlichen auf GitHub Pages
 
-Für eine Projektseite unter `https://<user>.github.io/post-sv_uebungen/` in `_config.yml` `baseurl: "/post-sv_uebungen"` setzen. Lokal bleibt `baseurl` leer.
+`baseurl` in `_config.yml` ist auf `/post-sv_uebungen` gesetzt (GitHub-Projektseite). Lokal mit `--baseurl ""` starten, dann läuft die Seite unter `http://localhost:4000/`.
 
 ## Credits
 

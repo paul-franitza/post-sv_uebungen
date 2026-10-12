@@ -3,10 +3,10 @@ title: Post SV
 subtitle: Volleyball
 email: paul.franitza@gmail.com
 description: Übungen und fertige Trainings für Tage ohne Trainer
-# Lokal: baseurl leer lassen. Für GitHub Pages unter https://<user>.github.io/post-sv_uebungen/
-# muss hier "/post-sv_uebungen" stehen.
-baseurl: ""
-url: ""
+# Für GitHub Pages unter https://paul-franitza.github.io/post-sv_uebungen/ muss baseurl
+# "/post-sv_uebungen" sein. Lokal: bundle exec jekyll serve --baseurl "" --livereload
+baseurl: "/post-sv_uebungen"
+url: "https://paul-franitza.github.io"
 author: Paul Franitza
 
 # Social-Links im Footer (Schlüssel = Name des Font-Awesome-Icons)
