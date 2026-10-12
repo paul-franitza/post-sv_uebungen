@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+{% include head.html %}
+<body>
+	{% include header.html %}
+	<div id="main" class="alt">
+		<section id="one">
+			<div class="inner training">
+				<p class="breadcrumb"><a href="{{ "/trainings/" | relative_url }}"><i class="fa fa-angle-left"></i> Alle fertigen Trainings</a></p>
+				<header class="major">
+					<h1>{{ page.title }}</h1>
+					<p class="lead">{{ page.kurz }}</p>
+				</header>
+				<ul class="meta-chips">
+					<li class="chip"><i class="fa fa-users"></i> {{ page.spieler_min }}–{{ page.spieler_max }} Spieler</li>
+					<li class="chip"><i class="fa fa-clock-o"></i> ca. {{ page.dauer }} min</li>
+					{% if page.schwerpunkt %}<li class="chip"><i class="fa fa-bullseye"></i> {{ page.schwerpunkt }}</li>{% endif %}
+				</ul>
+
+				{{ content }}
+
+				<ol class="ablauf">
+					{% for schritt in page.ablauf %}
+					{% assign b = site.data.bloecke | where: "key", schritt.block | first %}
+					<li class="ablauf-schritt" style="--c: {{ b.farbe }}">
+						<div class="ablauf-kopf">
+							<span class="badge badge-{{ b.key }} big">{{ b.buchstabe }}</span>
+							<div>
+								<h3>{{ b.name }}</h3>
+								<span class="muted"><i class="fa fa-clock-o"></i> {{ schritt.dauer }} min</span>
+							</div>
+						</div>
+						{% if schritt.hinweis %}<p class="ablauf-hinweis">{{ schritt.hinweis }}</p>{% endif %}
+						<ul class="ablauf-uebungen">
+							{% for slug in schritt.uebungen %}
+								{% assign pfad = "_uebungen/" | append: slug | append: ".md" %}
+								{% assign u = site.uebungen | where: "path", pfad | first %}
+								{% if u %}
+								<li><a href="{{ u.url | relative_url }}"><strong>{{ u.title }}</strong></a> <span class="muted">· {{ u.kurz }}</span>
+									{% include uebung-meta.html uebung=u %}</li>
+								{% else %}
+								<li class="chip-warn">Übung „{{ slug }}“ nicht gefunden – Dateiname prüfen.</li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+					</li>
+					{% endfor %}
+				</ol>
+			</div>
+		</section>
+	</div>
+	{% include footer.html %}
+</body>
+</html>

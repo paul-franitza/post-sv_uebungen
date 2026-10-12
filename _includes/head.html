@@ -1,9 +1,8 @@
 <head>
-	<title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+	<title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }} {{ site.subtitle }}</title>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<!--[if lte IE 8]><script src="{{ "assets/js/ie/html5shiv.js" | relative_url }}"></script><![endif]-->
-	<link rel="stylesheet" href="{{ "assets/css/main.css" | relative_url }}" />
-	<!--[if lte IE 9]><link rel="stylesheet" href="{{ "assets/css/ie9.css" | relative_url }}" /><![endif]-->
-	<!--[if lte IE 8]><link rel="stylesheet" href="{{ "assets/css/ie8.css" | relative_url }}" /><![endif]-->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="{{ page.beschreibung | default: site.description }}" />
+	<link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}" />
+	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23e7b788'/%3E%3Cpath d='M4 10 Q16 14 28 10 M4 22 Q16 18 28 22 M16 2 Q12 16 16 30' stroke='%23242943' stroke-width='2' fill='none'/%3E%3C/svg%3E" />
 </head>

@@ -1,0 +1,4 @@
+{%- for s in include.liste -%}
+{%- assign sw = site.data.stichworte | where: "key", s | first -%}
+<a class="hashtag" href="{{ "/uebungen/" | relative_url }}?stichwort={{ s }}">#{{ sw.name | default: s }}</a>
+{%- endfor -%}

@@ -1,0 +1,82 @@
+{%- comment -%}
+Zeichnet eine Skizze des Spielfelds aus den Angaben in "skizze:" einer Übung.
+Koordinaten in Metern: x = 0…18 (Länge, Netz bei 9), y = 0…9 (Breite).
+Aufruf: {% include sketch.html skizze=page.skizze %}
+{%- endcomment -%}
+{%- assign sk = include.skizze -%}
+{%- assign S = 24 -%}
+{%- assign M = 2 -%}
+{%- if sk.ansicht == "halb" -%}
+	{%- assign vw = 13 | times: S -%}
+{%- else -%}
+	{%- assign vw = 22 | times: S -%}
+{%- endif -%}
+{%- assign vh = 13 | times: S -%}
+{%- assign x0 = M | times: S -%}
+{%- assign y0 = M | times: S -%}
+{%- assign cw = 18 | times: S -%}
+{%- assign ch = 9 | times: S -%}
+{%- assign nx = 9 | plus: M | times: S -%}
+{%- assign a1 = 6 | plus: M | times: S -%}
+{%- assign a2 = 12 | plus: M | times: S -%}
+<figure class="skizze">
+<svg viewBox="0 0 {{ vw }} {{ vh }}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Skizze der Aufstellung">
+	<defs>
+		<marker id="pf-ball" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffd166"/></marker>
+		<marker id="pf-lauf" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9bf1ff"/></marker>
+	</defs>
+	<rect x="0" y="0" width="{{ vw }}" height="{{ vh }}" fill="#2a2f4a"/>
+	<rect x="{{ x0 }}" y="{{ y0 }}" width="{{ cw }}" height="{{ ch }}" fill="#3a4062" stroke="#ffffff" stroke-width="2"/>
+	<line x1="{{ a1 }}" y1="{{ y0 }}" x2="{{ a1 }}" y2="{{ y0 | plus: ch }}" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 4"/>
+	<line x1="{{ a2 }}" y1="{{ y0 }}" x2="{{ a2 }}" y2="{{ y0 | plus: ch }}" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 4"/>
+	<line x1="{{ nx }}" y1="{{ y0 | minus: 12 }}" x2="{{ nx }}" y2="{{ y0 | plus: ch | plus: 12 }}" stroke="#ffffff" stroke-width="5"/>
+	{%- for z in sk.zonen -%}
+		{%- assign zx = z.x | plus: M | times: S -%}
+		{%- assign zy = z.y | plus: M | times: S -%}
+		{%- assign zw = z.breite | default: 3 | times: S -%}
+		{%- assign zh = z.hoehe | default: 3 | times: S -%}
+	<rect x="{{ zx }}" y="{{ zy }}" width="{{ zw }}" height="{{ zh }}" fill="#ffd166" fill-opacity="0.22" stroke="#ffd166" stroke-width="1" stroke-dasharray="4 3"/>
+		{%- if z.name %}<text x="{{ zw | divided_by: 2.0 | plus: zx }}" y="{{ zh | divided_by: 2.0 | plus: zy | plus: 4 }}" text-anchor="middle" font-size="11" fill="#ffd166">{{ z.name }}</text>{% endif -%}
+	{%- endfor -%}
+	{%- for p in sk.pfeile -%}
+		{%- assign px1 = p.von[0] | plus: M | times: S -%}
+		{%- assign py1 = p.von[1] | plus: M | times: S -%}
+		{%- assign px2 = p.bis[0] | plus: M | times: S -%}
+		{%- assign py2 = p.bis[1] | plus: M | times: S -%}
+		{%- if p.art == "lauf" -%}
+	<line x1="{{ px1 }}" y1="{{ py1 }}" x2="{{ px2 }}" y2="{{ py2 }}" stroke="#9bf1ff" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#pf-lauf)"/>
+		{%- else -%}
+	<line x1="{{ px1 }}" y1="{{ py1 }}" x2="{{ px2 }}" y2="{{ py2 }}" stroke="#ffd166" stroke-width="2" marker-end="url(#pf-ball)"/>
+		{%- endif -%}
+	{%- endfor -%}
+	{%- for b in sk.baelle -%}
+		{%- assign bx = b.x | plus: M | times: S -%}
+		{%- assign by = b.y | plus: M | times: S -%}
+	<circle cx="{{ bx }}" cy="{{ by }}" r="6" fill="#ffd166" stroke="#242943" stroke-width="1.5"/>
+	{%- endfor -%}
+	{%- for sp in sk.spieler -%}
+		{%- assign cx = sp.x | plus: M | times: S -%}
+		{%- assign cy = sp.y | plus: M | times: S -%}
+		{%- assign n = sp.anzahl | default: 1 -%}
+		{%- if sp.name == "T" -%}{%- assign fill = "#ec8d81" -%}
+		{%- elsif sp.team == "b" -%}{%- assign fill = "#8d82c4" -%}
+		{%- else -%}{%- assign fill = "#6fc3df" -%}{%- endif -%}
+		{%- if n > 1 -%}
+			{%- for i in (2..n) -%}
+				{%- assign off = i | minus: 1 | times: 7 -%}
+	<circle cx="{{ cx | minus: off }}" cy="{{ cy | minus: off }}" r="12" fill="{{ fill }}" fill-opacity="0.5" stroke="#242943" stroke-width="1.5"/>
+			{%- endfor -%}
+		{%- endif -%}
+	<circle cx="{{ cx }}" cy="{{ cy }}" r="12" fill="{{ fill }}" stroke="#242943" stroke-width="1.5"/>
+	<text x="{{ cx }}" y="{{ cy | plus: 4 }}" text-anchor="middle" font-size="12" font-weight="600" fill="#242943">{{ sp.name }}</text>
+	{%- endfor -%}
+</svg>
+<figcaption>
+	<span class="leg"><i class="leg-dot" style="background:#6fc3df"></i> Spieler</span>
+	<span class="leg"><i class="leg-dot" style="background:#8d82c4"></i> anderes Team</span>
+	<span class="leg"><i class="leg-dot" style="background:#ec8d81"></i> T = Trainer/Anwerfer</span>
+	<span class="leg"><i class="leg-line" style="border-top:2px solid #ffd166"></i> Ballweg</span>
+	<span class="leg"><i class="leg-line" style="border-top:2px dashed #9bf1ff"></i> Laufweg</span>
+	{%- if sk.text %}<br/><em>{{ sk.text }}</em>{% endif -%}
+</figcaption>
+</figure>

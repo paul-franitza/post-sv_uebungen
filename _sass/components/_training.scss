@@ -1,0 +1,340 @@
+/* Eigene Komponenten für die Übungs-Seite */
+
+// Block-Farben als CSS-Variablen (Werte stehen auch in _data/bloecke.yml)
+:root {
+	--c-erwaermung: #87c5a4;
+	--c-einspielen: #6fc3df;
+	--c-uebung: #e7b788;
+	--c-spiel: #ec8d81;
+}
+
+/* Kennbuchstabe */
+.badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.6em;
+	height: 1.6em;
+	border-radius: 50%;
+	background: #888;
+	color: _palette(bg);
+	font-weight: _font(weight-bold);
+	font-size: 0.85em;
+	letter-spacing: 0;
+	line-height: 1;
+	vertical-align: middle;
+	flex: 0 0 auto;
+
+	&.big { width: 1.4em; height: 1.4em; font-size: 0.9em; margin-right: 0.15em; }
+	&.badge-erwaermung { background: var(--c-erwaermung); }
+	&.badge-einspielen { background: var(--c-einspielen); }
+	&.badge-uebung { background: var(--c-uebung); }
+	&.badge-spiel { background: var(--c-spiel); }
+}
+
+#menu .badge { margin-right: 0.3em; }
+
+/* Übersicht der Bausteine auf der Startseite */
+.bloecke {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1.25em;
+	margin: 2em 0 0;
+
+	@include breakpoint(large) { grid-template-columns: repeat(2, 1fr); }
+	@include breakpoint(xsmall) { grid-template-columns: 1fr; }
+}
+
+.block-card {
+	display: flex;
+	flex-direction: column;
+	border: solid 1px _palette(border);
+	border-top: 6px solid var(--c);
+	border-radius: _size(border-radius);
+	background: _palette(border-bg);
+	padding: 1.5em 1.5em 1.25em;
+	color: inherit;
+	text-decoration: none;
+	@include vendor('transition', ('transform 0.2s ease', 'background-color 0.2s ease'));
+
+	.block-letter {
+		width: 2.2em;
+		height: 2.2em;
+		border-radius: 50%;
+		background: var(--c);
+		color: _palette(bg);
+		font-size: 1.5em;
+		font-weight: _font(weight-bold);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 0.75em;
+	}
+	h3 { margin: 0 0 0.25em; font-size: 1.25em; }
+	.block-meta { color: var(--c); font-size: 0.85em; margin: 0 0 0.75em; }
+	p { margin: 0 0 1em; }
+	.block-link { margin-top: auto; color: var(--c); font-size: 0.9em; }
+
+	&:hover {
+		background: transparentize(_palette(fg), 0.95);
+		transform: translateY(-2px);
+	}
+}
+
+.block-header {
+	--c: #{_palette(highlight)};
+	h1 { display: flex; align-items: center; gap: 0.35em; flex-wrap: wrap; }
+	.block-meta { color: var(--c); margin: -1em 0 0; }
+	&:after { background: var(--c) !important; }
+}
+
+.lead { font-size: 1.15em; }
+.muted { color: transparentize(_palette(fg), 0.4); }
+.breadcrumb { margin-bottom: 1em; font-size: 0.9em; }
+
+.block-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	margin: 0 0 2em;
+}
+.block-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4em;
+	padding: 0.35em 0.9em 0.35em 0.5em;
+	border-radius: 2em;
+	border: 1px solid _palette(border);
+	font-size: 0.85em;
+	text-decoration: none;
+	color: inherit;
+	&.active { border-color: var(--c); background: transparentize(#fff, 0.93); }
+}
+
+/* Eingabefelder, die das Theme nicht abdeckt (search, number) */
+input[type="search"],
+input[type="number"] {
+	@include vendor('appearance', 'none');
+	background: _palette(border-bg);
+	border: solid 1px _palette(border);
+	border-radius: _size(border-radius);
+	color: inherit;
+	display: block;
+	outline: 0;
+	padding: 0 1em;
+	height: _size(element-height);
+	width: 100%;
+	&:focus { border-color: _palette(highlight); box-shadow: 0 0 0 1px _palette(highlight); }
+	&::placeholder { color: transparentize(_palette(fg), 0.5); }
+}
+
+/* Filter */
+.filter {
+	margin-bottom: 1.5em;
+	.filter-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75em;
+		align-items: center;
+		margin-bottom: 1em;
+	}
+	.search-input-wrapper { flex: 1 1 14em; }
+	#search-input { height: 2.75em; }
+		.players-input {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5em;
+		margin: 0;
+		font-size: 0.9em;
+		white-space: nowrap;
+		input { width: 5em; height: 2.75em; text-align: center; }
+	}
+	#results-count { font-size: 0.9em; color: transparentize(_palette(fg), 0.4); margin-top: 0.75em; }
+}
+
+.tags-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	margin-bottom: 0.75em;
+}
+
+.tag-button {
+	@extend .button;
+	height: 2.4em;
+	line-height: 2.4em;
+	padding: 0 1em;
+	background-color: transparent;
+	box-shadow: inset 0 0 0 2px transparentize(_palette(fg), 0.5);
+	color: _palette(fg);
+	text-transform: none;
+	letter-spacing: 0.05em;
+	font-size: 0.75em;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4em;
+
+	&:hover { box-shadow: inset 0 0 0 2px _palette(highlight); color: _palette(highlight); }
+	&.active {
+		box-shadow: inset 0 0 0 2px _palette(highlight) !important;
+		color: _palette(highlight) !important;
+		background-color: transparentize(_palette(highlight), 0.85) !important;
+	}
+	&.block-button.active {
+		box-shadow: inset 0 0 0 2px var(--c) !important;
+		color: var(--c) !important;
+		background-color: transparentize(#fff, 0.92) !important;
+	}
+}
+
+.hashtag {
+	display: inline-block;
+	margin-right: 0.6em;
+	color: _palette(highlight);
+	border-bottom: none;
+	&:hover { text-decoration: underline; }
+}
+
+/* Karten-Raster */
+.posts-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(17em, 1fr));
+	gap: 1.25em;
+}
+
+.post-box {
+	display: flex;
+	flex-direction: column;
+	gap: 0.6em;
+	border: solid 1px _palette(border);
+	border-left: 5px solid #888;
+	border-radius: _size(border-radius);
+	background: _palette(border-bg);
+	padding: 1.25em 1.25em 1em;
+	color: inherit;
+	text-decoration: none;
+	@include vendor('transition', ('transform 0.2s ease', 'background-color 0.2s ease'));
+
+	&.block-erwaermung { border-left-color: var(--c-erwaermung); }
+	&.block-einspielen { border-left-color: var(--c-einspielen); }
+	&.block-uebung { border-left-color: var(--c-uebung); }
+	&.block-spiel { border-left-color: var(--c-spiel); }
+
+	&:hover { background: transparentize(_palette(fg), 0.95); transform: translateY(-2px); }
+	&[hidden] { display: none; }
+
+	h2 { font-size: 1.1em; margin: 0 0 0.35em; display: flex; align-items: center; gap: 0.4em; }
+	.post-content p { margin: 0; font-size: 0.9em; }
+	.post-tags { display: flex; flex-wrap: wrap; gap: 0.3em; }
+	.post-tag {
+		font-size: 0.7em;
+		padding: 0.15em 0.6em;
+		border-radius: 1em;
+		background: transparentize(_palette(fg), 0.9);
+		&.highlight { background: transparentize(_palette(highlight), 0.7); color: _palette(highlight); }
+	}
+	.meta-chips { margin-top: auto; }
+	.training-bloecke { display: flex; gap: 0.3em; }
+}
+
+.keine-treffer { color: _palette(highlight); }
+
+/* Kleine Fakten-Chips */
+.meta-chips {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4em;
+	li { padding: 0; }
+}
+.chip, li.chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35em;
+	font-size: 0.75em;
+	padding: 0.2em 0.7em;
+	border-radius: 1em;
+	border: 1px solid _palette(border);
+	white-space: nowrap;
+	&.chip-ok { border-color: var(--c-erwaermung); color: var(--c-erwaermung); }
+	&.chip-warn { border-color: var(--c-uebung); color: var(--c-uebung); }
+}
+
+/* Übungsseite */
+.uebung-fakten {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+	gap: 1em 1.5em;
+	border: solid 1px _palette(border);
+	border-radius: _size(border-radius);
+	background: _palette(border-bg);
+	padding: 1.25em 1.5em;
+	margin-bottom: 2em;
+
+	.fakt h4 { margin: 0 0 0.25em; font-size: 0.7em; color: transparentize(_palette(fg), 0.4); }
+	.fakt p { margin: 0; }
+	.rollen { margin: 0.5em 0 0; padding-left: 1.1em; font-size: 0.85em; li { padding: 0; } }
+}
+
+.skizze {
+	margin: 0 0 2em;
+	svg { width: 100%; max-width: 40em; height: auto; display: block; border-radius: _size(border-radius); }
+	figcaption { font-size: 0.75em; color: transparentize(_palette(fg), 0.4); margin-top: 0.5em; }
+	.leg { display: inline-flex; align-items: center; gap: 0.3em; margin-right: 1em; }
+	.leg-dot { display: inline-block; width: 0.8em; height: 0.8em; border-radius: 50%; }
+	.leg-line { display: inline-block; width: 1.4em; height: 0; }
+}
+
+.uebung-text {
+	h2 { font-size: 1.25em; margin-top: 1.5em; }
+	ol li, ul li { padding-left: 0.25em; margin-bottom: 0.35em; }
+}
+
+/* Fertige Trainings */
+.training-links { list-style: none; padding: 0; li { padding: 0.25em 0; } }
+.quick-players {
+	display: flex;
+	gap: 0.75em;
+	align-items: center;
+	input { width: 7em; }
+}
+
+.ablauf {
+	list-style: none;
+	padding: 0;
+	margin: 2em 0 0;
+	counter-reset: none;
+}
+.ablauf-schritt {
+	border: solid 1px _palette(border);
+	border-left: 6px solid var(--c);
+	border-radius: _size(border-radius);
+	background: _palette(border-bg);
+	padding: 1.25em 1.5em;
+	margin-bottom: 1.25em;
+
+	.ablauf-kopf { display: flex; align-items: center; gap: 0.75em; margin-bottom: 0.75em;
+		h3 { margin: 0; font-size: 1.1em; }
+	}
+	.ablauf-hinweis { font-size: 0.9em; margin-bottom: 0.75em; }
+	.ablauf-uebungen {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		li { padding: 0.5em 0; border-top: 1px solid _palette(border); }
+		.meta-chips { margin-top: 0.4em; }
+	}
+}
+
+.inner-section {
+	border-top: 1px solid _palette(border);
+	> .inner { @include padding(4em, 0); margin: 0 auto; max-width: _size(inner); width: calc(100% - 6em);
+		@include breakpoint(small) { @include padding(3em, 0); width: calc(100% - 3em); } }
+	&.alt-bg { background: _palette(bg-alt); }
+}
+
+/* Code-Blöcke in den Anleitungen */
+pre { white-space: pre-wrap; word-break: break-word; font-size: 0.85em; }
+.anleitung img { max-width: 100%; }

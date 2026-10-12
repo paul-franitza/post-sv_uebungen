@@ -1,0 +1,49 @@
+# Die Bausteine eines Trainings, in dieser Reihenfolge.
+# key:        wird in den Übungen unter "block:" eingetragen
+# buchstabe:  Kennbuchstabe auf allen Karten
+# farbe:      Farbe des Blocks (Hex)
+# dauer:      Richtwert in Minuten
+- key: erwaermung
+  buchstabe: A
+  name: Erwärmung
+  farbe: "#87c5a4"
+  dauer: "15 min"
+  anzahl: "1 Übung"
+  kurz: Körper warm machen, am besten mit Spaß und etwas Ball.
+  text: >
+    Zum Start muss der Kreislauf in Schwung kommen und die Schultern, Knie und Sprunggelenke
+    müssen warm werden. Ein kleines Spiel mit Ball macht das lockerer als stumpfes Laufen.
+    Danach kurz dehnen und Arme kreisen.
+- key: einspielen
+  buchstabe: B
+  name: Einspielen
+  farbe: "#6fc3df"
+  dauer: "20 min"
+  anzahl: "1–2 Übungen"
+  kurz: Ballgefühl holen - Pritschen, Baggern, Schlagen.
+  text: >
+    Hier geht es nur um Ballkontakte: viele Berührungen in kurzer Zeit, wenig Erklärung.
+    Erst zu zweit ruhig anfangen, dann steigern. Wer am Netz einschlagen will, sollte vorher
+    ein paar Minuten gepritscht und gebaggert haben.
+- key: uebung
+  buchstabe: C
+  name: Übungen
+  farbe: "#e7b788"
+  dauer: "3 × 15–20 min"
+  anzahl: "3 Übungen"
+  kurz: Der Schwerpunkt des Tages - Annahme, Angriff, Block, Abwehr …
+  text: >
+    Das ist der Kern des Trainings. Sucht euch ein Thema (zum Beispiel Annahme oder
+    Block-Abwehr) und nehmt drei passende Übungen. Lieber eine Übung richtig machen
+    als fünf nur kurz anreißen.
+- key: spiel
+  buchstabe: D
+  name: Spiel
+  farbe: "#ec8d81"
+  dauer: "30–35 min"
+  anzahl: "1 Spielform"
+  kurz: Zum Schluss wird gespielt - gern mit einer kleinen Regel-Vorgabe.
+  text: >
+    Zum Abschluss wird gespielt. Mit einer kleinen Vorgabe (zum Beispiel "jeder Ball muss
+    dreimal berührt werden") bleibt das Thema des Tages im Spiel erhalten. Bei wenigen Leuten
+    gibt es Spielformen für 3 gegen 3, bei vielen Rundlauf oder Königsball.

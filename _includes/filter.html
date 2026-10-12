@@ -1,0 +1,26 @@
+{%- comment -%} Filterleiste: Stichworte, Spielerzahl, Textsuche. include.bloecke=true zeigt zusätzlich die Block-Buttons. {%- endcomment -%}
+<div class="filter">
+	<div class="filter-row">
+		<div class="search-input-wrapper">
+			<input type="search" id="search-input" placeholder="Übung suchen …" aria-label="Übung suchen">
+		</div>
+		<label class="players-input" for="players-input">
+			<i class="fa fa-users"></i> Wie viele seid ihr?
+			<input type="number" id="players-input" min="1" max="30" inputmode="numeric" placeholder="egal">
+		</label>
+		<button type="button" id="filter-reset" class="button small">Zurücksetzen</button>
+	</div>
+	{%- if include.bloecke %}
+	<div class="tags-row" id="block-buttons">
+		{%- for b in site.data.bloecke %}
+		<button type="button" class="tag-button block-button" data-block="{{ b.key }}" style="--c: {{ b.farbe }}"><span class="badge badge-{{ b.key }}">{{ b.buchstabe }}</span> {{ b.name }}</button>
+		{%- endfor %}
+	</div>
+	{%- endif %}
+	<div class="tags-row" id="tag-buttons">
+		{%- for s in site.data.stichworte %}
+		<button type="button" class="tag-button" data-tag="{{ s.key }}" title="{{ s.text }}">#{{ s.name }}</button>
+		{%- endfor %}
+	</div>
+	<div id="results-count" aria-live="polite"></div>
+</div>

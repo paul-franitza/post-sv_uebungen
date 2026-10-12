@@ -2,25 +2,23 @@
 <div id="wrapper">
 
 <!-- Header -->
-<header id="header"{% if page.layout == "landing" %} class="alt style2"{% endif %}{% if page.layout == "home" %} class="alt"{% endif %}>
-	<a href="{{ "" | absolute_url }}/" class="logo"><strong>{{ site.title }}</strong> <span>{{ site.subtitle }}</span></a>
+<header id="header"{% if page.layout == "home" %} class="alt"{% endif %}>
+	<a href="{{ "/" | relative_url }}" class="logo"><strong>{{ site.title }}</strong> <span>{{ site.subtitle }}</span></a>
 	<nav>
-		<a href="#menu">Menu</a>
+		<a href="#menu">Menü</a>
 	</nav>
 </header>
 
 <!-- Menu -->
 <nav id="menu">
-    <ul class="links">
-        {% for page in site.pages %}
-            {% if page.layout == "home" or page.layout == "search" %}
-                <li><a href="{{ page.url | absolute_url }}">{{ page.title }}</a></li>
-            {% endif %}
-        {% endfor %}
-        {% for page in site.html_pages %}
-            {% if page.layout != "home" and page.nav-menu == true %}
-                <li><a href="{{ page.url | absolute_url }}">{{ page.title }}</a></li>
-            {% endif %}
-        {% endfor %}
-    </ul>
+	<ul class="links">
+		<li><a href="{{ "/" | relative_url }}">Start</a></li>
+		<li><a href="{{ "/trainings/" | relative_url }}">Fertige Trainings</a></li>
+		<li><a href="{{ "/uebungen/" | relative_url }}">Alle Übungen</a></li>
+		{% for b in site.data.bloecke %}
+		<li><a href="{{ "/bloecke/" | append: b.key | append: "/" | relative_url }}"><span class="badge badge-{{ b.key }}">{{ b.buchstabe }}</span> {{ b.name }}</a></li>
+		{% endfor %}
+		<li><a href="{{ "/anleitung/" | relative_url }}">Anleitung</a></li>
+		<li><a href="{{ "/neue-uebung/" | relative_url }}">Neue Übung anlegen</a></li>
+	</ul>
 </nav>

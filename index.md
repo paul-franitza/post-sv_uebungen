@@ -1,9 +1,5 @@
 ---
 layout: home
-title: Home
-landing-title: 'Schnieke Volleyballübungen'
-description: null
-image: null
-author: null
-show_tile: false
+title: Start
+landing-title: 'Training ohne Trainer? Kein Problem.'
 ---

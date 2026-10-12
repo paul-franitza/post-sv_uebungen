@@ -1,0 +1,11 @@
+{%- assign u = include.uebung -%}
+<ul class="meta-chips">
+	<li class="chip chip-players" title="Spieleranzahl"><i class="fa fa-users"></i>
+		{%- if u.spieler_min and u.spieler_max -%}
+			{%- if u.spieler_min == u.spieler_max %} {{ u.spieler_min }}{% else %} {{ u.spieler_min }}–{{ u.spieler_max }}{% endif -%}
+		{%- elsif u.spieler_min %} ab {{ u.spieler_min }}{% else %} egal{% endif -%}
+	</li>
+	{%- if u.dauer %}<li class="chip" title="Dauer"><i class="fa fa-clock-o"></i> {{ u.dauer }} min</li>{% endif -%}
+	{%- if u.trainer_spielt_mit == true %}<li class="chip chip-ok" title="Der Trainer muss nicht von außen einwerfen"><i class="fa fa-check"></i> Trainer spielt mit</li>
+	{%- elsif u.trainer_spielt_mit == false %}<li class="chip chip-warn" title="Jemand muss von außen anwerfen oder anschlagen"><i class="fa fa-hand-paper-o"></i> Einer wirft an</li>{% endif -%}
+</ul>

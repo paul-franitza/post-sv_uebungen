@@ -1,0 +1,2 @@
+{%- assign _b = site.data.bloecke | where: "key", include.block | first -%}
+{%- if _b -%}<span class="badge badge-{{ _b.key }}" title="{{ _b.name }}">{{ _b.buchstabe }}</span>{%- endif -%}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+{% include head.html %}
+<body>
+	{% include header.html %}
+	<div id="main" class="alt">
+		<section id="one">
+			<div class="inner">
+				<header class="major">
+					<h1>{{ page.title }}</h1>
+				</header>
+				{{ content }}
+				<div class="posts-grid trainings-grid">
+					{% for t in site.trainings %}
+					<a href="{{ t.url | relative_url }}" class="post-box">
+						<div class="post-content">
+							<h2>{{ t.title }}</h2>
+							<p>{{ t.kurz }}</p>
+						</div>
+						<div class="training-bloecke">
+							{% for schritt in t.ablauf %}{% include badge.html block=schritt.block %}{% endfor %}
+						</div>
+						<ul class="meta-chips">
+							<li class="chip"><i class="fa fa-users"></i> {{ t.spieler_min }}–{{ t.spieler_max }}</li>
+							<li class="chip"><i class="fa fa-clock-o"></i> {{ t.dauer }} min</li>
+							{% if t.schwerpunkt %}<li class="chip"><i class="fa fa-bullseye"></i> {{ t.schwerpunkt }}</li>{% endif %}
+						</ul>
+					</a>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	</div>
+	{% include footer.html %}
+</body>
+</html>

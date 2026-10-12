@@ -1,50 +1,18 @@
 <!DOCTYPE html>
-<!--
-	Forty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-
+<html lang="de">
 {% include head.html %}
-
 <body>
-
-    {% include header.html %} 
-    
-<!-- Main -->
-<div id="main" class="alt">
-
-<!-- One -->
-<section id="one">
-	<div class="inner">
-		<header class="major">
-			<h1>{{ page.title }}</h1>
-		</header>
-		{{ content }}
-		
-		<!-- Tagbased Post Lists -->
-		{% assign tag = page.tag %}
-
-		<div class="posts-grid">
-			{% for post in site.posts %}
-				{% if post.tags contains tag %}
-					<a href="{{ post.url | relative_url }}" class="post-box">
-						<div class="post-content">
-							<h2>{{ post.title }}</h2>
-							<p>{{ post.description }}</p>
-						</div>
-					</a>
-				{% endif %}
-			{% endfor %}
-		</div>		
+	{% include header.html %}
+	<div id="main" class="alt">
+		<section id="one">
+			<div class="inner">
+				<header class="major">
+					<h1>{{ page.title }}</h1>
+				</header>
+				{{ content }}
+			</div>
+		</section>
 	</div>
-</section>
-
-</div>
-
-    {% include footer.html %}
-
+	{% include footer.html %}
 </body>
-
 </html>

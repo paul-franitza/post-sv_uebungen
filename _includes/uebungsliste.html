@@ -1,0 +1,25 @@
+{%- comment -%} Karten-Raster für Übungen. include.uebungen = Liste der Übungen. {%- endcomment -%}
+<div class="posts-grid" id="uebungsliste">
+	{%- for u in include.uebungen -%}
+	{%- assign b = site.data.bloecke | where: "key", u.block | first -%}
+	<a href="{{ u.url | relative_url }}" class="post-box block-{{ u.block }}"
+		data-block="{{ u.block }}"
+		data-tags="{{ u.stichworte | join: ' ' }}"
+		data-min="{{ u.spieler_min | default: 1 }}"
+		data-max="{{ u.spieler_max | default: 99 }}"
+		data-title="{{ u.title | downcase }}">
+		<div class="post-content">
+			<h2><span class="badge badge-{{ u.block }}">{{ b.buchstabe }}</span> {{ u.title }}</h2>
+			<p>{{ u.kurz }}</p>
+		</div>
+		<div class="post-tags">
+			{%- for s in u.stichworte -%}
+				{%- assign sw = site.data.stichworte | where: "key", s | first -%}
+				<span class="post-tag" data-tag="{{ s }}">#{{ sw.name | default: s }}</span>
+			{%- endfor -%}
+		</div>
+		{% include uebung-meta.html uebung=u %}
+	</a>
+	{%- endfor -%}
+</div>
+<p class="keine-treffer" id="keine-treffer" hidden>Keine Übung passt zu dieser Auswahl. Nimm einen Filter raus.</p>

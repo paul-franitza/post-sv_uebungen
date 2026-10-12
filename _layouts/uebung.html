@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+{% include head.html %}
+<body>
+	{% include header.html %}
+	{% assign b = site.data.bloecke | where: "key", page.block | first %}
+	<div id="main" class="alt">
+		<section id="one">
+			<div class="inner uebung">
+				<p class="breadcrumb"><a href="{{ "/bloecke/" | append: b.key | append: "/" | relative_url }}"><i class="fa fa-angle-left"></i> Alle Übungen in {{ b.buchstabe }} {{ b.name }}</a></p>
+				<header class="major block-header" style="--c: {{ b.farbe }}">
+					<h1><span class="badge badge-{{ b.key }} big">{{ b.buchstabe }}</span> {{ page.title }}</h1>
+					<p class="lead">{{ page.kurz }}</p>
+				</header>
+
+				<div class="uebung-fakten">
+					<div class="fakt">
+						<h4>Gut für</h4>
+						<p>{% include stichworte.html liste=page.stichworte %}</p>
+					</div>
+					<div class="fakt">
+						<h4>Spieler</h4>
+						<p><i class="fa fa-users"></i>
+						{%- if page.spieler_min and page.spieler_max %} {{ page.spieler_min }} bis {{ page.spieler_max }}{% elsif page.spieler_min %} ab {{ page.spieler_min }}{% else %} egal{% endif -%}
+						{%- if page.spieler_ideal %} <span class="muted">(ideal: {{ page.spieler_ideal }})</span>{% endif %}</p>
+						{% if page.rollen %}<ul class="rollen">{% for r in page.rollen %}<li>{{ r }}</li>{% endfor %}</ul>{% endif %}
+					</div>
+					<div class="fakt">
+						<h4>Dauer</h4>
+						<p><i class="fa fa-clock-o"></i> {{ page.dauer | default: "10–15" }} min</p>
+					</div>
+					<div class="fakt">
+						<h4>Trainer</h4>
+						{% if page.trainer_spielt_mit == true %}
+						<p><span class="chip chip-ok"><i class="fa fa-check"></i> kann mitspielen</span></p>
+						{% elsif page.trainer_spielt_mit == false %}
+						<p><span class="chip chip-warn"><i class="fa fa-hand-paper-o"></i> einer wirft/schlägt von außen an</span></p>
+						{% else %}<p>egal</p>{% endif %}
+					</div>
+					{% if page.material %}
+					<div class="fakt">
+						<h4>Material</h4>
+						<p>{{ page.material }}</p>
+					</div>
+					{% endif %}
+				</div>
+
+				{% if page.skizze %}
+					{% include sketch.html skizze=page.skizze %}
+				{% endif %}
+				{% if page.bild %}
+					<span class="image main"><img src="{{ page.bild | relative_url }}" alt="Skizze: {{ page.title }}" /></span>
+				{% endif %}
+
+				<div class="uebung-text">
+					{{ content }}
+				</div>
+
+				<hr/>
+				<p class="muted">Fehler gefunden oder bessere Variante? <a href="{{ "/neue-uebung/" | relative_url }}">So änderst du Übungen.</a></p>
+			</div>
+		</section>
+	</div>
+	{% include footer.html %}
+</body>
+</html>

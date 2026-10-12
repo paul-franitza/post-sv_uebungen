@@ -1,3 +1,5 @@
-Gemfile*
-.jekyll-chache
+Gemfile.lock
+.jekyll-cache
+.jekyll-metadata
 _site
+vendor

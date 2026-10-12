@@ -1,34 +1,54 @@
-# site settings
+# Seiteneinstellungen
 title: Post SV
 subtitle: Volleyball
 email: paul.franitza@gmail.com
-description:  
-baseurl: "/"
-url: # the base hostname & protocol for your site
+description: Übungen und fertige Trainings für Tage ohne Trainer
+# Lokal: baseurl leer lassen. Für GitHub Pages unter https://<user>.github.io/post-sv_uebungen/
+# muss hier "/post-sv_uebungen" stehen.
+baseurl: ""
+url: ""
 author: Paul Franitza
 
-# homepage tiles
-tiles-source: pages # accepts "posts" or "pages"
-tiles-count: 10
-
-# social settings (key must match name of font awesome icon)
-# see https://fontawesome.com/icons?d=gallery&p=2&s=brands
-# Icons are not shown if value is empty
-# You need to restart jekyll for changes to have an effect
+# Social-Links im Footer (Schlüssel = Name des Font-Awesome-Icons)
 socials:
   Envelope: paul.franitza@gmail.com
   GitHub: https://github.com/paul-franitza
   Instagram: https://www.instagram.com/paul_fr_/
 
-# build settings
+# Sammlungen: Übungen und fertige Trainings liegen in eigenen Ordnern
+collections:
+  uebungen:
+    output: true
+    permalink: /uebungen/:name/
+  trainings:
+    output: true
+    permalink: /trainings/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: uebungen
+    values:
+      layout: uebung
+  - scope:
+      path: ""
+      type: trainings
+    values:
+      layout: training
+
+# Build-Einstellungen
 markdown: kramdown
+kramdown:
+  input: GFM
 
 sass:
   style: compressed
 
 exclude:
-- "*.gemspec"
-- LICENSE.md
-- CONTRIBUTING.md
-- README.md 
-- _posts/2025-3-5-template_exercise.md
+  - "*.gemspec"
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE.md
+  - CONTRIBUTING.md
+  - README.md
+  - vendor

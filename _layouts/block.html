@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+{% include head.html %}
+<body>
+	{% include header.html %}
+	{% assign b = site.data.bloecke | where: "key", page.block | first %}
+	<div id="main" class="alt">
+		<section id="one">
+			<div class="inner">
+				<header class="major block-header" style="--c: {{ b.farbe }}">
+					<h1><span class="badge badge-{{ b.key }} big">{{ b.buchstabe }}</span> {{ b.name }}</h1>
+					<p class="block-meta"><i class="fa fa-clock-o"></i> {{ b.dauer }} &nbsp;·&nbsp; {{ b.anzahl }} pro Training</p>
+				</header>
+				<p>{{ b.text }}</p>
+				{{ content }}
+				<nav class="block-nav">
+					{% for other in site.data.bloecke %}
+					<a href="{{ "/bloecke/" | append: other.key | append: "/" | relative_url }}" class="block-pill {% if other.key == b.key %}active{% endif %}" style="--c: {{ other.farbe }}"><span class="badge badge-{{ other.key }}">{{ other.buchstabe }}</span> {{ other.name }}</a>
+					{% endfor %}
+				</nav>
+				{% include filter.html bloecke=false %}
+				{% assign liste = site.uebungen | where: "block", b.key | sort: "title" %}
+				{% include uebungsliste.html uebungen=liste %}
+			</div>
+		</section>
+	</div>
+	{% include footer.html %}
+	<script src="{{ "/assets/js/filter.js" | relative_url }}"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+# Stichworte ("Gut für"), die in den Übungen unter "stichworte:" eingetragen werden.
+# key: so wird es in den Übungen geschrieben (klein, ohne Leerzeichen)
+# name: so wird es angezeigt
+- key: aufschlag
+  name: Aufschlag
+  text: Aufschlag von oben oder unten, gezielt und sicher.
+- key: annahme
+  name: Annahme
+  text: Aufschläge sauber zum Zuspieler bringen.
+- key: zuspiel
+  name: Zuspiel
+  text: Den zweiten Ball hoch und genau zum Angreifer stellen.
+- key: angriff
+  name: Angriff
+  text: Anlauf, Sprung, Schlag - und dabei den Block sehen.
+- key: block
+  name: Block
+  text: Am Netz springen, Hände rüber, Ball abwehren.
+- key: feldabwehr
+  name: Feldabwehr
+  text: Harte Bälle im Feld hochhalten.
+- key: block-abwehr
+  name: Block-Abwehr
+  text: Block und Feldabwehr zusammen abstimmen.
+- key: spielfluss
+  name: Spielfluss
+  text: Lange Ballwechsel, Übergänge zwischen Annahme, Zuspiel und Angriff.
+- key: beinarbeit
+  name: Beinarbeit
+  text: Schnell unter den Ball kommen, Schritte am Netz.
+- key: kommunikation
+  name: Kommunikation
+  text: Rufen, absprechen, zusammen spielen.
+- key: kondition
+  name: Kondition
+  text: Laufen, springen, schwitzen.
+- key: spass
+  name: Spaß
+  text: Lockere Spielformen und Spiele zum Aufwärmen.

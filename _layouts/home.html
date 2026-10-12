@@ -1,50 +1,93 @@
 <!DOCTYPE html>
-<!--
-	Forty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-
+<html lang="de">
 {% include head.html %}
-
 <body>
+	{% include header.html %}
 
-    {% include header.html %}
+	<!-- Banner -->
+	<section id="banner" class="major">
+		<div class="inner">
+			<header class="major">
+				<h1>{{ page.landing-title }}</h1>
+			</header>
+			<div class="content">
+				<p>{{ site.description }}</p>
+				<ul class="actions">
+					<li><a href="#aufbau" class="button next scrolly">Training zusammenstellen</a></li>
+					<li><a href="{{ "/trainings/" | relative_url }}" class="button">Fertiges Training nehmen</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
 
-    <!-- Banner -->
-    <section id="banner" class="major">
-        <div class="inner">
-            <header class="major">
-                <h1>{{ page.landing-title }}</h1>
-            </header>
-            <div class="content">
-                <p style="text-transform: uppercase;">{{ site.description }}</p>
-                <ul class="actions">
-                    <li><a href="#one" class="button next scrolly">Zu den Übungen</a></li>
-                </ul>
-            </div>
-        </div>
-    </section>
+	<div id="main">
+		<!-- Trainingsaufbau -->
+		<section id="aufbau" class="inner-section">
+			<div class="inner">
+				<header class="major">
+					<h2>So ist ein Training aufgebaut</h2>
+				</header>
+				<p>Ein Training besteht aus vier Bausteinen, immer in dieser Reihenfolge. Tipp auf einen Baustein und such dir dort eine Übung aus. Zusammen sind das etwa 120 Minuten - ein normaler Trainingsabend.</p>
+				<div class="bloecke">
+					{% for b in site.data.bloecke %}
+					{% assign n = site.uebungen | where: "block", b.key | size %}
+					<a class="block-card" href="{{ "/bloecke/" | append: b.key | append: "/" | relative_url }}" style="--c: {{ b.farbe }}">
+						<div class="block-letter">{{ b.buchstabe }}</div>
+						<div class="block-body">
+							<h3>{{ b.name }}</h3>
+							<p class="block-meta"><i class="fa fa-clock-o"></i> {{ b.dauer }} &nbsp;·&nbsp; {{ b.anzahl }}</p>
+							<p>{{ b.kurz }}</p>
+							<span class="block-link">{{ n }} Übungen ansehen <i class="fa fa-angle-right"></i></span>
+						</div>
+					</a>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
 
-    <!-- Main -->
-    <div id="main">
+		<!-- Schnellstart -->
+		<section id="schnellstart" class="inner-section alt-bg">
+			<div class="inner">
+				<div class="row">
+					<div class="col-6 col-12-medium">
+						<header class="major"><h2>Wie viele seid ihr?</h2></header>
+						<p>Gib die Anzahl ein, dann siehst du nur Übungen, die mit so vielen Leuten funktionieren.</p>
+						<form class="quick-players" action="{{ "/uebungen/" | relative_url }}" method="get">
+							<input type="number" name="spieler" min="1" max="30" inputmode="numeric" placeholder="z. B. 8" aria-label="Anzahl Spieler">
+							<button type="submit" class="button primary">Übungen zeigen</button>
+						</form>
+					</div>
+					<div class="col-6 col-12-medium">
+						<header class="major"><h2>Fertige Trainings</h2></header>
+						<p>Keine Lust zu basteln? Hier sind komplette Trainings zum Abhaken.</p>
+						<ul class="training-links">
+							{% for t in site.trainings %}
+							<li><a href="{{ t.url | relative_url }}"><strong>{{ t.title }}</strong> <span class="muted">· {{ t.spieler_min }}–{{ t.spieler_max }} Spieler · {{ t.dauer }} min</span></a></li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
 
-        <!-- One -->
-        {% include tiles.html %}
+		<!-- Stichworte -->
+		<section id="stichworte" class="inner-section">
+			<div class="inner">
+				<header class="major"><h2>Ihr wollt etwas Bestimmtes üben?</h2></header>
+				<p>Tipp auf ein Stichwort und du bekommst alle passenden Übungen.</p>
+				<div class="tags-row">
+					{% for s in site.data.stichworte %}
+					<a class="tag-button" href="{{ "/uebungen/" | relative_url }}?stichwort={{ s.key }}" title="{{ s.text }}">#{{ s.name }}</a>
+					{% endfor %}
+				</div>
+				<ul class="actions" style="margin-top:2em">
+					<li><a href="{{ "/anleitung/" | relative_url }}" class="button">Anleitung lesen</a></li>
+					<li><a href="{{ "/neue-uebung/" | relative_url }}" class="button">Neue Übung anlegen</a></li>
+				</ul>
+			</div>
+		</section>
+	</div>
 
-        <!-- Two -->
-        <section id="two">
-            <div class="inner">
-                <header class="major">
-                </header>
-            </div>
-        </section>
-
-    </div>
-
-    {% include footer.html %}
-
+	{% include footer.html %}
 </body>
-
 </html>
